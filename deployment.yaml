@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {servicename}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {servicename}
+  template:
+    metadata:
+      labels:
+        app: {servicename}
+    spec:
+      containers:
+      - name: inventorydbservice
+        image: {imagename}
+        ports:
+        - containerPort: 80
+        env:        
+        - name: "ConnectionString"
+          value: 'Server=sqlcontainers.eastus.azurecontainer.io;Initial Catalog=Inventory;Persist Security Info=False;User ID=sa;Password=Persistance100;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;'
+        
